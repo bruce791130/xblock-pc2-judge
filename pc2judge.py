@@ -10,9 +10,7 @@ from xblock.core import XBlock
 from xblock.fields import Scope, Integer, String
 from xblock.fragment import Fragment
 
-#log = logging.getLogger(__name__)
 
-#test222 = str(log)
 class Pc2JudgeBlock(XBlock):
     """A simple block: just show some fixed content."""
     href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
@@ -21,8 +19,7 @@ class Pc2JudgeBlock(XBlock):
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     
     def student_view(self, context):  # pylint: disable=W0613
-        #HOST, PORT = "localhost", 9994
-        #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
         frag.add_css("""
@@ -30,9 +27,7 @@ class Pc2JudgeBlock(XBlock):
                 border: solid 1px #888; padding: 3px;
             }
             """)
-        #sock.connect((HOST, PORT))
-        #sock.sendall(test222)
-        #sock.close()
+       
         
         event_data = {'value': 1 , 'max_value': 1}
         self.runtime.publish(self, 'grade', event_data)
