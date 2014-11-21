@@ -47,7 +47,7 @@ class Pc2JudgeBlock(XBlock):
                 border: solid 1px #888; padding: 3px;
             }
             """)
-        js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge.js")
+        js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge.js")
         frag.add_javascript(unicode(js_str))
         frag.initialize_js('Pc2JudgeBlock')
         return frag
