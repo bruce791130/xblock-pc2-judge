@@ -10,9 +10,7 @@ from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Scope, String, Float
 from xblock.fragment import Fragment
 
-#log = logging.getLogger(__name__)
 
-#test222 = str(log)
 class Pc2JudgeBlock(XBlock):
     has_score = True
     icon_class = 'problem'
@@ -52,15 +50,15 @@ class Pc2JudgeBlock(XBlock):
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
         return self.points
-    def student_view(self, context):  # pylint: disable=W0613
-        #HOST, PORT = "localhost", 9994
-        #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    def student_view(self, context=None):  # pylint: disable=W0613
+        
         if not self.score_published and self.score_approved:
             self.runtime.publish(self, 'grade', {
                 'value': self.score,
                 'max_value': self.max_score(),
             })
-        self.score_published = True
+            self.score_published = True
+            
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
         frag.add_css("""
