@@ -25,6 +25,10 @@ class Pc2JudgeBlock(XBlock):
     def student_view(self, context):  # pylint: disable=W0613
         #HOST, PORT = "localhost", 9994
         #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.runtime.publish(self, 'grade', {
+                'value': 1,
+                'max_value': 2,
+            })
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
         frag.add_css("""
@@ -36,8 +40,7 @@ class Pc2JudgeBlock(XBlock):
         #sock.sendall(test222)
         #sock.close()
         
-        event_data = {'value': 1 , 'max_value': 1}
-        self.runtime.publish(self, 'grade', event_data)
+        
         frag.initialize_js('Pc2JudgeBlock')
         return frag
     
