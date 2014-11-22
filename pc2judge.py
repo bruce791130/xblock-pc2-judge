@@ -16,19 +16,51 @@ from xblock.fragment import Fragment
 class Pc2JudgeBlock(XBlock):
     has_score = True
     icon_class = 'problem'
+    points = Float(
+        display_name="Maximum score",
+        help=("Maximum grade score given to assignment by staff."),
+        values={"min": 0, "step": .1},
+        default=100,
+        scope=Scope.settings
+    )
+
+    score = Float(
+        display_name="Grade score",
+        default=None,
+        help=("Grade score given to assignment by staff."),
+        values={"min": 0, "step": .1},
+        scope=Scope.user_state
+    )
+    score_published = Boolean(
+        display_name="Whether score has been published.",
+        help=("This is a terrible hack, an implementation detail."),
+        default=True,
+        scope=Scope.user_state
+    )
+
+    score_approved = Boolean(
+        display_name="Whether the score has been approved by an instructor",
+        help=("Course staff may submit grades but an instructor must approve "
+              "grades before they become visible."),
+        default=False,
+        scope=Scope.user_state
+    )
     """A simple block: just show some fixed content."""
     href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
-    
+    def max_score(self):
+        return self.points
     def student_view(self, context):  # pylint: disable=W0613
         #HOST, PORT = "localhost", 9994
         #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.runtime.publish(self, 'grade', {
-                'value': 1,
-                'max_value': 2,
+        if not self.score_published and self.score_approved:
+            self.runtime.publish(self, 'grade', {
+                'value': self.score,
+                'max_value': self.max_score(),
             })
+        self.score_published = True
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
         frag.add_css("""
