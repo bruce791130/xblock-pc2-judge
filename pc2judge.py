@@ -7,7 +7,7 @@ import sys
 from urlparse import urlparse
 
 from xblock.core import XBlock
-from xblock.fields import Scope, Integer, String
+from xblock.fields import Boolean, DateTime, Scope, String, Float
 from xblock.fragment import Fragment
 
 #log = logging.getLogger(__name__)
