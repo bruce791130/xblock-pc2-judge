@@ -38,7 +38,13 @@ class Pc2JudgeBlock(XBlock):
         self.runtime.publish(self, 'grade', event_data)
         frag.initialize_js('Pc2JudgeBlock')
         return frag
-
+    def has_score(self):
+        """Are we a scored type (read: a problem). Yes.
+        For LMS Progress page/grades download purposes, we're always going to
+        have a score, even if it's just 0 at the start.
+        """
+        return True
+        
     def studio_view(self, context):
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge2.html")
         frag = Fragment(unicode(html_str).format(self=self))
