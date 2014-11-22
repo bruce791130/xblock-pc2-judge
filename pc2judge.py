@@ -39,7 +39,7 @@ class Pc2JudgeBlock(XBlock):
     score_published = Boolean(
         display_name="Whether score has been published.",
         help=("This is a terrible hack, an implementation detail."),
-        default=True,
+        default=False,
         scope=Scope.user_state
     )
 
