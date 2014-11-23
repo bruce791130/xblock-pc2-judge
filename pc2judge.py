@@ -66,9 +66,9 @@ class Pc2JudgeBlock(XBlock):
             })
             self.score_published = True
         
-        self.score = 50
+        self.score = 50.0
         self.runtime.publish(self, 'grade', {
-                'value': self.score,
+                'value': 75.0,
                 'max_value': self.max_score(),
         })
         
