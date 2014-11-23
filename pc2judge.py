@@ -21,7 +21,7 @@ class Pc2JudgeBlock(XBlock):
         default=50,
         scope=Scope.settings
     )
-    weight2 = Float(
+    weight = Float(
         display_name="Problem Weight",
         help=("Defines the number of points each problem is worth. "
               "If the value is not set, the problem is worth the sum of the "
