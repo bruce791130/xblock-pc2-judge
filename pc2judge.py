@@ -62,7 +62,7 @@ class Pc2JudgeBlock(XBlock):
         self.score = 50.0
         if not self.score_published and self.score_approved:
             self.runtime.publish(self, 'grade', {
-                'value': self.score,
+                'value': 75.0,
                 'max_value': self.max_score(),
             })
             self.score_published = True
