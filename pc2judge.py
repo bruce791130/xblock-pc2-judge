@@ -65,7 +65,13 @@ class Pc2JudgeBlock(XBlock):
                 'max_value': self.max_score(),
             })
             self.score_published = True
-            
+        
+        self.score = 50
+        self.runtime.publish(self, 'grade', {
+                'value': self.score,
+                'max_value': self.max_score(),
+        })
+        
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
         frag.add_css("""
