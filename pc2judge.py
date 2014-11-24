@@ -9,28 +9,7 @@ from urlparse import urlparse
 from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer
 from xblock.fragment import Fragment
-import datetime
-import hashlib
-import json
-import logging
-import mimetypes
-import os
-import pkg_resources
-import pytz
 
-from functools import partial
-
-from courseware.models import StudentModule
-
-from django.core.files import File
-from django.core.files.storage import default_storage
-from django.template import Context, Template
-
-from webob.response import Response
-
-
-
-from xmodule.util.duedate import get_extended_due_date
 
 class Pc2JudgeBlock(XBlock):
     has_score = True
