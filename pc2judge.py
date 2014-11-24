@@ -59,7 +59,7 @@ class Pc2JudgeBlock(XBlock):
         return self.points2
     def student_view(self, context=None):  # pylint: disable=W0613
         
-        #self.score2 = 50.0
+        self.points2 = 90
         #if not self.score_published2 and self.score_approved2:
         #    self.runtime.publish(self, 'grade', {
         #        'value':  self.score2,
