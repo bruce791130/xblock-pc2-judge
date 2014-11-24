@@ -14,12 +14,12 @@ from xblock.fragment import Fragment
 class Pc2JudgeBlock(XBlock):
     has_score = True
     icon_class = 'problem'
-    points4 = Float(
+    points16= Float(
         display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=90,
-        scope=Scope.user_state
+        default=20,
+        scope=Scope.settings
     )
     weight = Float(
         display_name="Problem Weight",
@@ -56,7 +56,7 @@ class Pc2JudgeBlock(XBlock):
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
-        return self.points3
+        return self.points16
     def student_view(self, context=None):  # pylint: disable=W0613
         
         #self.points2 = 90
