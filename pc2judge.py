@@ -18,7 +18,7 @@ class Pc2JudgeBlock(XBlock):
         display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=70,
+        default=90,
         scope=Scope.user_state
     )
     weight = Float(
