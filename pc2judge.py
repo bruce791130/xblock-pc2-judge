@@ -34,7 +34,7 @@ class Pc2JudgeBlock(XBlock):
         default=10,
         help=("Grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        scope=Scope.user_state
+        scope=Scope.settings
     )
     score_published2 = Boolean(
         display_name="Whether score has been published.",
