@@ -60,13 +60,12 @@ class Pc2JudgeBlock(XBlock):
     def student_view(self, context=None):  # pylint: disable=W0613
         
         self.score2 = 50
-        if not self.score_published2 and self.score_approved2:
-            self.runtime.publish(self, 'grade', {
-                'value':  self.score2,
-                'max_value': self.max_score(),
-            })
-            self.score_published2 = True
-            self.score_approved2 = False
+        
+        self.runtime.publish(self, 'grade', {
+            'value':  50,
+            'max_value': self.max_score(),
+        })
+            
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
