@@ -18,7 +18,7 @@ class Pc2JudgeBlock(XBlock):
         display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=70,
+        default=100,
         scope=Scope.settings
     )
     weight = Float(
@@ -64,6 +64,11 @@ class Pc2JudgeBlock(XBlock):
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
                 'max_value': self.max_score(),
+            })
+        if not self.score_published2 and self.score_approved2:
+            self.runtime.publish(self, 'grade', {
+                'value':  30,
+                
             })
             self.score_published2 = True
             score_approved2 = False
