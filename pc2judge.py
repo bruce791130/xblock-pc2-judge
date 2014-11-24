@@ -59,12 +59,12 @@ class Pc2JudgeBlock(XBlock):
         return self.points2
     def student_view(self, context=None):  # pylint: disable=W0613
         
-        self.score2 = 50
+        #self.score2 = 50
         
-        self.runtime.publish(self, 'grade', {
-            'value':  50,
-            'max_value': self.max_score()
-        })
+        #self.runtime.publish(self, 'grade', {
+        #    'value':  50,
+        #    'max_value': self.max_score()
+        #})
             
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
