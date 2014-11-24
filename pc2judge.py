@@ -29,11 +29,11 @@ class Pc2JudgeBlock(XBlock):
         values={"min": 0, "step": .1},
         scope=Scope.settings
     )
-    score2 = Float(
+    score2 = Integer(
         display_name="Grade score",
-        default=None,
+        default=2,
         help=("Grade score given to assignment by staff."),
-        values={"min": 0, "step": .1},
+        
         scope=Scope.user_state
     )
     score_published2 = Boolean(
@@ -59,7 +59,7 @@ class Pc2JudgeBlock(XBlock):
         return self.points2
     def student_view(self, context=None):  # pylint: disable=W0613
         
-        self.score2 = 50.0
+        self.score2 = 50
         if not self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
