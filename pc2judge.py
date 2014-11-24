@@ -18,7 +18,7 @@ class Pc2JudgeBlock(XBlock):
         display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=70,
+        default=40,
         scope=Scope.settings
     )
     weight = Float(
@@ -59,14 +59,14 @@ class Pc2JudgeBlock(XBlock):
         return self.points2
     def student_view(self, context=None):  # pylint: disable=W0613
         
-        self.score2 = 50.0
-        if not self.score_published2 and self.score_approved2:
-            self.runtime.publish(self, 'grade', {
-                'value':  self.score2,
-                'max_value': self.score2,
-            })
-            self.score_published2 = True
-            score_approved2 = False
+        #self.score2 = 50.0
+        #if not self.score_published2 and self.score_approved2:
+        #    self.runtime.publish(self, 'grade', {
+        #        'value':  self.score2,
+        #        'max_value': self.score2,
+        #    })
+        #    self.score_published2 = True
+        #    score_approved2 = False
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
