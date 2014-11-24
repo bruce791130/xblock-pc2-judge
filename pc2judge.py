@@ -14,12 +14,12 @@ from xblock.fragment import Fragment
 class Pc2JudgeBlock(XBlock):
     has_score = True
     icon_class = 'problem'
-    points3 = Float(
+    points4 = Float(
         display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
         default=70,
-        scope=Scope.settings
+        scope=Scope.user_state
     )
     weight = Float(
         display_name="Problem Weight",
