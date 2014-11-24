@@ -66,7 +66,7 @@ class Pc2JudgeBlock(XBlock):
                 'max_value': self.max_score(),
             })
             self.score_published2 = True
-            score_approved2 = False
+            self.score_approved2 = False
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
