@@ -55,11 +55,11 @@ class Pc2JudgeBlock(XBlock):
         default=True,
         scope=Scope.user_state
     )
-    moxscore= Float(
+    mnxscore= Float(
         #display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=47,
+        default=60,
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
@@ -77,7 +77,7 @@ class Pc2JudgeBlock(XBlock):
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
-                'max_value': self.max_score(),
+                'max_value': self.score2,
                 'user_id':self.runtime.anonymous_student_id,
             })
            
