@@ -57,17 +57,23 @@ class Pc2JudgeBlock(XBlock):
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
-        return self.maxscore
+        return self.mixscore
     def student_view(self, context=None):  # pylint: disable=W0613
         
         #self.points2 = 90
-        #if  self.score_published2 and self.score_approved2:
-        #    self.runtime.publish(self, 'grade', {
-        #        'value':  self.max_score(),
-        #        'max_value': self.max_score(),
-        #    })
-        #    self.score_published2 = False
-        #    self.score_approved2 = False
+        if  self.score_published2 and self.score_approved2:
+            self.runtime.publish(self, 'grade', {
+                'value':  score2,
+                'max_value': self.max_score(),
+            })
+           
+        if  self.score_published2 and self.score_approved2:
+            self.runtime.publish(self, 'grade', {
+                'value':  score2,
+                'max_value': self.max_score(),
+            })
+            self.score_published2 = False
+            self.score_approved2 = False
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
