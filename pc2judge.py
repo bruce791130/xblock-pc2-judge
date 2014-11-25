@@ -14,11 +14,11 @@ from xblock.fragment import Fragment
 class Pc2JudgeBlock(XBlock):
     has_score = True
     icon_class = 'problem'
-    points16= Float(
+    maxscore= Float(
         display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=20,
+        default=50,
         scope=Scope.settings
     )
     weight = Float(
@@ -29,21 +29,21 @@ class Pc2JudgeBlock(XBlock):
         values={"min": 0, "step": .1},
         scope=Scope.settings
     )
-    score3 = Float(
+    score2 = Float(
         display_name="Grade score",
         default=10,
         help=("Grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
         scope=Scope.settings
     )
-    score_published3 = Boolean(
+    score_published2 = Boolean(
         display_name="Whether score has been published.",
         help=("This is a terrible hack, an implementation detail."),
-        default=False,
+        default=True,
         scope=Scope.user_state
     )
 
-    score_approved3 = Boolean(
+    score_approved2 = Boolean(
         display_name="Whether the score has been approved by an instructor",
         help=("Course staff may submit grades but an instructor must approve "
               "grades before they become visible."),
@@ -56,17 +56,17 @@ class Pc2JudgeBlock(XBlock):
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
-        return self.points16
+        return self.maxscore
     def student_view(self, context=None):  # pylint: disable=W0613
         
         #self.points2 = 90
-        #if not self.score_published2 and self.score_approved2:
-        #    self.runtime.publish(self, 'grade', {
-        #        'value':  self.score2,
-        #        'max_value': self.score2,
-        #    })
-        #    self.score_published2 = True
-        #    score_approved2 = False
+        if  self.score_published2 and self.score_approved2:
+           self.runtime.publish(self, 'grade', {
+                'value':  self.max_score(),
+                'max_value': self.max_score(),
+            })
+            self.score_published2 = False
+            score_approved2 = False
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
