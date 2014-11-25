@@ -8,6 +8,7 @@ from urlparse import urlparse
 from lxml import etree
 from pkg_resources import resource_string
 
+
 from xmodule.x_module import XModule
 from xmodule.raw_module import RawDescriptor
 from xblock.core import Scope, String
