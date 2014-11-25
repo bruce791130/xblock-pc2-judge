@@ -14,13 +14,7 @@ from xblock.fragment import Fragment
 class Pc2JudgeBlock(XBlock):
     has_score = True
     icon_class = 'problem'
-    maxscore= Float(
-        display_name="Maximum score",
-        help=("Maximum grade score given to assignment by staff."),
-        values={"min": 0, "step": .1},
-        default=50,
-        scope=Scope.settings
-    )
+   
     weight = Float(
         display_name="Problem Weight",
         help=("Defines the number of points each problem is worth. "
@@ -50,6 +44,13 @@ class Pc2JudgeBlock(XBlock):
         default=True,
         scope=Scope.user_state
     )
+    mixscore= Float(
+        #display_name="Maximum score",
+        help=("Maximum grade score given to assignment by staff."),
+        values={"min": 0, "step": .1},
+        default=50,
+        scope=Scope.settings
+    )
     """A simple block: just show some fixed content."""
     href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
@@ -60,13 +61,13 @@ class Pc2JudgeBlock(XBlock):
     def student_view(self, context=None):  # pylint: disable=W0613
         
         #self.points2 = 90
-        if  self.score_published2 and self.score_approved2:
-            self.runtime.publish(self, 'grade', {
-                'value':  self.max_score(),
-                'max_value': self.max_score(),
-            })
-            self.score_published2 = False
-            self.score_approved2 = False
+        #if  self.score_published2 and self.score_approved2:
+        #    self.runtime.publish(self, 'grade', {
+        #        'value':  self.max_score(),
+        #        'max_value': self.max_score(),
+        #    })
+        #    self.score_published2 = False
+        #    self.score_approved2 = False
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
