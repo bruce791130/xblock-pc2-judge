@@ -65,6 +65,7 @@ class Pc2JudgeBlock(XBlock):
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
                 'max_value': self.max_score(),
+                'user_id':self.runtime.anonymous_student_id,
             })
            
         if  self.score_published2 and self.score_approved2:
