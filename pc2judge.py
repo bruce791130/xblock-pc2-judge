@@ -56,11 +56,11 @@ class Pc2JudgeBlock(XBlock):
         default=True,
         scope=Scope.user_state
     )
-    mnxscore= Float(
+    zxscore= Float(
         #display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=60,
+        default=50,
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
@@ -69,12 +69,15 @@ class Pc2JudgeBlock(XBlock):
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
-        return self.mnxscore
+        return self.zxscore
     def student_view(self, context=None):  # pylint: disable=W0613
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        test = str(self.runtime.anonymous_student_id)
+        #test = str(self.runtime.anonymous_student_id)
+        self.zxscore = 84
+        test=str(self.max_score())
         self.score2 = 90
+        test2=str(self.score2)
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
@@ -84,7 +87,7 @@ class Pc2JudgeBlock(XBlock):
             self.score_published2 = True
             self.score_approved2 = True
             
-        self.runtime.publish(self, 'progress', {'value':  self.score2,'max_value': self.max_score(),})
+        #self.runtime.publish(self, 'progress', {'value':  self.score2,'max_value': self.max_score(),})
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
         frag.add_css("""
@@ -94,6 +97,7 @@ class Pc2JudgeBlock(XBlock):
             """)
         sock.connect((HOST, PORT))
         sock.sendall(test)
+        sock.sendall(test2)
         sock.close()
         
         
