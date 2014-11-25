@@ -60,7 +60,7 @@ class Pc2JudgeBlock(XBlock):
         return self.mixscore
     def student_view(self, context=None):  # pylint: disable=W0613
         
-        #self.points2 = 90
+        self.points2 = 90
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
@@ -72,6 +72,7 @@ class Pc2JudgeBlock(XBlock):
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
                 'max_value': self.max_score(),
+                'user_id':self.runtime.anonymous_student_id,
             })
             self.score_published2 = False
             self.score_approved2 = False
