@@ -77,7 +77,7 @@ class Pc2JudgeBlock(XBlock):
         #self.zxscore = 84
         #test=str(self.max_score())
         self.score2 = 90
-        test2=str(self.score2)
+        test=str(self.score2)
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
@@ -96,8 +96,8 @@ class Pc2JudgeBlock(XBlock):
             }
             """)
         sock.connect((HOST, PORT))
+        #sock.sendall(test)
         sock.sendall(test)
-        sock.sendall(test2)
         sock.close()
         
         
