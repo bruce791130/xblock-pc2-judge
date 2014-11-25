@@ -48,7 +48,7 @@ class Pc2JudgeBlock(XBlock):
         #display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=50,
+        default=47,
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
