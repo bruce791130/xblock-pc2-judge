@@ -74,8 +74,8 @@ class Pc2JudgeBlock(XBlock):
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #test = str(self.runtime.anonymous_student_id)
-        self.zxscore = 84
-        test=str(self.max_score())
+        #self.zxscore = 84
+        #test=str(self.max_score())
         self.score2 = 90
         test2=str(self.score2)
         if  self.score_published2 and self.score_approved2:
