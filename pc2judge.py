@@ -56,7 +56,7 @@ class Pc2JudgeBlock(XBlock):
         default=True,
         scope=Scope.user_state
     )
-    zxscore= Float(
+    zscore= Float(
         #display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
@@ -77,6 +77,8 @@ class Pc2JudgeBlock(XBlock):
         #self.zxscore = 84
         #test=str(self.max_score())
         self.score2 = 90
+        self.score_published2 = True
+        self.score_approved2 = True
         test=str(self.score2)
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
