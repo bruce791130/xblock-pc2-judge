@@ -15,6 +15,7 @@ from xblock.core import Scope, String
 from xmodule.annotator_mixin import get_instructions
 from xmodule.annotator_token import retrieve_token
 from xblock.fragment import Fragment
+from xblock.run_script import run_script
 import textwrap
 
 from xblock.core import XBlock
