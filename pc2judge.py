@@ -61,12 +61,12 @@ class Pc2JudgeBlock(XBlock):
         
         #self.points2 = 90
         if  self.score_published2 and self.score_approved2:
-           self.runtime.publish(self, 'grade', {
+            self.runtime.publish(self, 'grade', {
                 'value':  self.max_score(),
                 'max_value': self.max_score(),
             })
             self.score_published2 = False
-            score_approved2 = False
+            self.score_approved2 = False
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
