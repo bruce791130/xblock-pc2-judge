@@ -63,13 +63,13 @@ class Pc2JudgeBlock(XBlock):
         #self.points2 = 90
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
-                'value':  score2,
+                'value':  self.score2,
                 'max_value': self.max_score(),
             })
            
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
-                'value':  score2,
+                'value':  self.score2,
                 'max_value': self.max_score(),
             })
             self.score_published2 = False
