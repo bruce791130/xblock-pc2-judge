@@ -69,7 +69,7 @@ class Pc2JudgeBlock(XBlock):
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
-        return self.moxscore
+        return self.mnxscore
     def student_view(self, context=None):  # pylint: disable=W0613
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -78,8 +78,7 @@ class Pc2JudgeBlock(XBlock):
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
-                'max_value': self.score2,
-                'user_id':self.runtime.anonymous_student_id,
+                'max_value': self.score2
             })
            
             self.score_published2 = True
