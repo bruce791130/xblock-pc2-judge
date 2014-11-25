@@ -38,7 +38,7 @@ class Pc2JudgeBlock(XBlock):
         default=10,
         help=("Grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        scope=Scope.settings
+        scope=Scope.user_state
     )
     score_published2 = Boolean(
         display_name="Whether score has been published.",
@@ -72,16 +72,16 @@ class Pc2JudgeBlock(XBlock):
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         test = str(self.runtime.anonymous_student_id)
-        self.points2 = 90
+        self.score2 = 90
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
-                'value':  20,
+                'value':  self.score2,
                 'max_value': self.max_score(),
                 'user_id':self.runtime.anonymous_student_id,
             })
            
-            self.score_published2 = False
-            self.score_approved2 = False
+            self.score_published2 = True
+            self.score_approved2 = True
         
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
