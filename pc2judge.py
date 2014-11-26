@@ -110,7 +110,7 @@ class Pc2JudgeBlock(XBlock):
         """
         Called when submitting the form in Studio.
         """
-        self.maxheight = 10
+        
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.score2 = 90
