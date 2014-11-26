@@ -19,7 +19,7 @@ from xblock.run_script import run_script
 import textwrap
 
 from xblock.core import XBlock
-from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer
+from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer,ScopeIds
 from xblock.fragment import Fragment
 
 
@@ -88,7 +88,7 @@ class Pc2JudgeBlock(XBlock):
            
             self.score_published2 = True
             self.score_approved2 = True
-            
+        self.pc2(12)    
         #self.runtime.publish(self, 'progress', {'value':  self.score2,'max_value': self.max_score(),})
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
@@ -114,14 +114,14 @@ class Pc2JudgeBlock(XBlock):
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.score2 = 90
-        test222 = str(self.score2)
+        test = str(ScopeIds.user_id)
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
                 'max_value': self.max_score()
             })
         sock.connect((HOST, PORT))
-        sock.sendall(test222)
+        sock.sendall(test)
         sock.close()
         
         
