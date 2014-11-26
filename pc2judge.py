@@ -83,7 +83,7 @@ class Pc2JudgeBlock(XBlock):
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
-                'max_value': max_score()
+                'max_value': self.max_score()
             })
            
             self.score_published2 = True
@@ -118,7 +118,7 @@ class Pc2JudgeBlock(XBlock):
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
-                'max_value': max_score()
+                'max_value': self.max_score()
             })
         sock.connect((HOST, PORT))
         sock.sendall(test222)
