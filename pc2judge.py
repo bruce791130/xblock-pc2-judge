@@ -105,7 +105,27 @@ class Pc2JudgeBlock(XBlock):
         
         frag.initialize_js('Pc2JudgeBlock')
         return frag
-    
+        
+    def pc2(self, data, suffix=''): 
+        """
+        Called when submitting the form in Studio.
+        """
+        self.maxheight = 10
+        HOST, PORT = "localhost", 9994
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.score2 = 90
+        test222 = str(self.score2)
+        if  self.score_published2 and self.score_approved2:
+            self.runtime.publish(self, 'grade', {
+                'value':  self.score2,
+                'max_value': max_score()
+            })
+        sock.connect((HOST, PORT))
+        sock.sendall(test222)
+        sock.close()
+        
+        
+        return {'status': 'ok'}   
         
     def studio_view(self, context):
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge2.html")
