@@ -60,7 +60,7 @@ class Pc2JudgeBlock(XBlock):
         #display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=64,
+        default=78,
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
@@ -86,8 +86,8 @@ class Pc2JudgeBlock(XBlock):
                 'max_value': self.max_score()
             })
            
-            self.score_published2 = True
-            self.score_approved2 = True
+            self.score_published2 = False
+            self.score_approved2 = False
         self.pc2(12)    
         #self.runtime.publish(self, 'progress', {'value':  self.score2,'max_value': self.max_score(),})
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
@@ -114,12 +114,12 @@ class Pc2JudgeBlock(XBlock):
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.score2 = 90
-        test = str(ScopeIds.user_id)
-        if  self.score_published2 and self.score_approved2:
-            self.runtime.publish(self, 'grade', {
-                'value':  self.score2,
-                'max_value': self.max_score()
-            })
+        test = str(self.score_published2)
+       
+        self.runtime.publish(self, 'grade', {
+            'value':  self.score2,
+            
+        })
         sock.connect((HOST, PORT))
         sock.sendall(test)
         sock.close()
