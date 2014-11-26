@@ -79,7 +79,7 @@ class Pc2JudgeBlock(XBlock):
         self.score2 = 70
         self.score_published2 = True
         self.score_approved2 = True
-        test=str(self.score2)
+        #test=str(self.score2)
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade', {
                 'value':  self.score2,
@@ -97,10 +97,10 @@ class Pc2JudgeBlock(XBlock):
                 border: solid 1px #888; padding: 3px;
             }
             """)
-        sock.connect((HOST, PORT))
+        #sock.connect((HOST, PORT))
         #sock.sendall(test)
-        sock.sendall(test)
-        sock.close()
+        #sock.sendall(test)
+        #sock.close()
         
         
         frag.initialize_js('Pc2JudgeBlock')
@@ -111,7 +111,7 @@ class Pc2JudgeBlock(XBlock):
         Called when submitting the form in Studio.
         """
         self.maxheight = 10
-        HOST, PORT = "localhost", 9994
+        HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.score2 = 90
         test222 = str(self.score2)
