@@ -74,7 +74,7 @@ class Pc2JudgeBlock(XBlock):
     def student_view(self, context=None):  # pylint: disable=W0613
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        #test = str(self.runtime.anonymous_student_id)
+        userid = str(self.runtime.anonymous_student_id)
         #self.zxscore = 84
         #test=str(self.max_score())
         self.score2 = 70
@@ -100,7 +100,7 @@ class Pc2JudgeBlock(XBlock):
         HOST, PORT = "140.115.51.242", 9888
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((HOST, PORT))
-        sock.sendall("7a09903b27841bf707c824122342080d")
+        sock.sendall(userid)
         data1 = sock.recv(1024).strip()
         data2 = sock.recv(1024).strip()
         #print data1
