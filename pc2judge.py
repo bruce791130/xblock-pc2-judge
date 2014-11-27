@@ -80,11 +80,9 @@ class Pc2JudgeBlock(XBlock):
         self.score_published2 = True
         self.score_approved2 = True
         #test=str(self.score2)
+        event_data = {'value': self.score2, 'max_value': self.max_score(),}
         if  self.score_published2 and self.score_approved2:
-            self.runtime.publish(self, 'grade', {
-                'value':  self.score2,
-                'max_value': self.max_score()
-            })
+            self.runtime.publish(self, 'grade',  event_data)
            
             self.score_published2 = False
             self.score_approved2 = False
@@ -114,12 +112,10 @@ class Pc2JudgeBlock(XBlock):
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.score2 = 90
-        test = str(self.score_published2)
+        test = str(self)
        
-        self.runtime.publish(self, 'grade', {
-            'value':  self.score2,
-            
-        })
+        event_data = {'value': self.score2, 'max_value': self.max_score(),}
+        self.runtime.publish(self, 'grade',event_data)
         sock.connect((HOST, PORT))
         sock.sendall(test)
         sock.close()
