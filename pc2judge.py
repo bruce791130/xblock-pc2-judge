@@ -109,7 +109,7 @@ class Pc2JudgeBlock(XBlock):
         if data2 == "YES":
             if  self.score_published2 and self.score_approved2:
                 self.runtime.publish(self, 'grade',  event_data)
-               
+                self.pc2(12)
                 self.score_published2 = False
                 self.score_approved2 = False
         frag.initialize_js('Pc2JudgeBlock')
