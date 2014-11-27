@@ -19,7 +19,7 @@ from xblock.run_script import run_script
 import textwrap
 
 from xblock.core import XBlock
-from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer,ScopeIds
+from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer,ScopeIds,Runtime
 from xblock.fragment import Fragment
 
 
