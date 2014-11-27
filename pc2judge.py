@@ -107,12 +107,11 @@ class Pc2JudgeBlock(XBlock):
         print data2
         sock.close()
         if data2 == "YES":
-             
-        if  self.score_published2 and self.score_approved2:
-            self.runtime.publish(self, 'grade',  event_data)
-           
-            self.score_published2 = False
-            self.score_approved2 = False
+            if  self.score_published2 and self.score_approved2:
+                self.runtime.publish(self, 'grade',  event_data)
+               
+                self.score_published2 = False
+                self.score_approved2 = False
         frag.initialize_js('Pc2JudgeBlock')
         return frag
         
