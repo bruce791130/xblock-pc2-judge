@@ -19,9 +19,9 @@ from xblock.run_script import run_script
 import textwrap
 
 from xblock.core import XBlock
-from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer,ScopeIds,Runtime
+from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer,ScopeIds
 from xblock.fragment import Fragment
-
+import xblock.runtime
 
 class Pc2JudgeBlock(XBlock):
     has_score = True
