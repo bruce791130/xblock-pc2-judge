@@ -29,6 +29,7 @@ class Pc2JudgeBlock(XBlock):
    
     weight = Float(
         display_name="Problem Weight",
+        default=10,
         help=("Defines the number of points each problem is worth. "
               "If the value is not set, the problem is worth the sum of the "
               "option point values."),
@@ -56,11 +57,11 @@ class Pc2JudgeBlock(XBlock):
         default=True,
         scope=Scope.user_state
     )
-    zscore= Float(
+    zcore895= Float(
         #display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=78,
+        default=100,
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
@@ -69,7 +70,7 @@ class Pc2JudgeBlock(XBlock):
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
-        return self.zscore
+        return self.zcore895
     def student_view(self, context=None):  # pylint: disable=W0613
         HOST, PORT = "140.115.51.242", 9994
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -115,7 +116,7 @@ class Pc2JudgeBlock(XBlock):
         test = str(self)
        
         event_data = {'value': self.score2, 'max_value': self.max_score(),}
-        self.runtime.publish(self, 'grade',event_data)
+        self.runtime.publish('Pc2JudgeBlockWithMixins', 'grade',event_data)
         sock.connect((HOST, PORT))
         sock.sendall(test)
         sock.close()
