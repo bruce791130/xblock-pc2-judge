@@ -72,8 +72,7 @@ class Pc2JudgeBlock(XBlock):
     def max_score(self):
         return self.zcore895
     def student_view(self, context=None):  # pylint: disable=W0613
-        HOST, PORT = "140.115.51.242", 9994
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        
         userid = str(self.runtime.anonymous_student_id)
         #self.zxscore = 84
         #test=str(self.max_score())
