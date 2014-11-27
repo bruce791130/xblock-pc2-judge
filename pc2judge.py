@@ -96,18 +96,18 @@ class Pc2JudgeBlock(XBlock):
         #sock.sendall(test)
         #sock.sendall(test)
         #sock.close()
-        while True:
-            HOST, PORT = "140.115.51.242", 9888
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.connect((HOST, PORT))
-            sock.sendall("7a09903b27841bf707c824122342080d")
-            data1 = sock.recv(1024).strip()
-            data2 = sock.recv(1024).strip()
-            #print data1
-            print data2
-            sock.close()
-            if data2 == "YES":
-                break
+       
+        HOST, PORT = "140.115.51.242", 9888
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((HOST, PORT))
+        sock.sendall("7a09903b27841bf707c824122342080d")
+        data1 = sock.recv(1024).strip()
+        data2 = sock.recv(1024).strip()
+        #print data1
+        print data2
+        sock.close()
+        if data2 == "YES":
+             
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade',  event_data)
            
