@@ -29,7 +29,7 @@ class Pc2JudgeBlock(XBlock):
    
     weight = Float(
         display_name="Problem Weight",
-        default=10,
+        default=100,
         help=("Defines the number of points each problem is worth. "
               "If the value is not set, the problem is worth the sum of the "
               "option point values."),
@@ -61,7 +61,7 @@ class Pc2JudgeBlock(XBlock):
         #display_name="Maximum score",
         help=("Maximum grade score given to assignment by staff."),
         values={"min": 0, "step": .1},
-        default=100,
+        default=10,
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
@@ -81,7 +81,7 @@ class Pc2JudgeBlock(XBlock):
         self.score_published2 = True
         self.score_approved2 = True
         #test=str(self.score2)
-        event_data = {'value': self.score2, 'max_value': self.max_score(),}
+        event_data = {'value': self.weight, 'max_value': self.max_score(),}
         if  self.score_published2 and self.score_approved2:
             self.runtime.publish(self, 'grade',  event_data)
            
@@ -115,7 +115,7 @@ class Pc2JudgeBlock(XBlock):
         self.score2 = 90
         test = str(self)
        
-        event_data = {'value': self.score2, 'max_value': self.max_score(),}
+        event_data = {'value': self.max_score(), 'max_value': self.max_score(),}
         self.runtime.publish('Pc2JudgeBlockWithMixins', 'grade',event_data)
         sock.connect((HOST, PORT))
         sock.sendall(test)
