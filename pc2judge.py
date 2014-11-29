@@ -29,7 +29,7 @@ class Pc2JudgeBlock(XBlock):
    
     weight = Float(
         display_name="Problem Weight",
-        default=100,
+        default=1,
         help=("Defines the number of points each problem is worth. "
               "If the value is not set, the problem is worth the sum of the "
               "option point values."),
@@ -82,7 +82,7 @@ class Pc2JudgeBlock(XBlock):
         #test=str(self.score2)
         event_data = {'value': self.weight, 'max_value': self.max_score(),}
         
-        #self.pc2(12)    
+        self.pc2(12)    
         #self.runtime.publish(self, 'progress', {'value':  self.score2,'max_value': self.max_score(),})
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
         frag = Fragment(unicode(html_str).format(self=self))
@@ -96,23 +96,7 @@ class Pc2JudgeBlock(XBlock):
         #sock.sendall(test)
         #sock.close()
        
-        HOST, PORT = "140.115.51.242", 9888
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((HOST, PORT))
-        sock.sendall(userid)
-        data1 = sock.recv(1024).strip()
-        data2 = sock.recv(1024).strip()
-        #print data1
-        print data2
-        sock.close()
-        if data2 == "YES":
-            self.pc2(12)
-        if  self.score_published2 and self.score_approved2:
-            self.runtime.publish(self, 'grade',  event_data)
-            self.pc2(12)
-            self.score_published2 = False
-            self.score_approved2 = False
-        self.pc2(12)    
+        
         frag.initialize_js('Pc2JudgeBlock')
         return frag
         
@@ -121,13 +105,13 @@ class Pc2JudgeBlock(XBlock):
         Called when submitting the form in Studio.
         """
         
-        HOST, PORT = "140.115.51.242", 9994
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        #HOST, PORT = "140.115.51.242", 9994
+        #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.score2 = 90
         test = str(self)
        
-        event_data = {'value': self.max_score(), 'max_value': self.max_score(),}
-        self.runtime.publish('Pc2JudgeBlockWithMixins', 'grade',event_data)
+        event_data = {'value': self.weight, 'max_value': self.weight,}
+        self.runtime.publish(self, 'grade',event_data)
         sock.connect((HOST, PORT))
         sock.sendall(test)
         sock.close()
