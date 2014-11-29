@@ -112,9 +112,9 @@ class Pc2JudgeBlock(XBlock):
        
         event_data = {'value': self.weight, 'max_value': self.weight,}
         self.runtime.publish(self, 'grade',event_data)
-        sock.connect((HOST, PORT))
-        sock.sendall(test)
-        sock.close()
+        #sock.connect((HOST, PORT))
+        #sock.sendall(test)
+        #sock.close()
         
         
         return {'status': 'ok'}   
