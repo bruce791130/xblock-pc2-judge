@@ -100,13 +100,13 @@ class Pc2JudgeBlock(XBlock):
         	frag.add_javascript(unicode(js_str))
         	frag.initialize_js('Pc2JudgeBlock')
         elif(choose=="YES"):
-		    self.href = studentid 
+		self.href = studentid 
         	
         	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_2.js")
         	frag.add_javascript(unicode(js_str))
         	frag.initialize_js('Pc2JudgeBlock2')
         elif(choose=="NO"):
-		    self.href = studentid 
+		self.href = studentid 
         	
         	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_3.js")
         	frag.add_javascript(unicode(js_str))
