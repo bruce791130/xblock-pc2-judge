@@ -65,7 +65,7 @@ class Pc2JudgeBlock(XBlock):
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
-    href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
+    edxid = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
     problemtext = Integer(help="Maximum width of the video", default=0, scope=Scope.content)
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
@@ -77,7 +77,7 @@ class Pc2JudgeBlock(XBlock):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.problemtext=3
         studentid =str(self.runtime.anonymous_student_id)
-        self.href = studentid 
+        self.edxid = studentid 
         sock.connect((HOST, PORT))
         sock.sendall(studentid)
         sock.close()
@@ -91,22 +91,22 @@ class Pc2JudgeBlock(XBlock):
         
         sock2.close()
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
-        frag = Fragment(unicode(html_str).format(href=self.href,problemtext=self.problemtext))   
+        frag = Fragment(unicode(html_str).format(edxid=self.edxid,problemtext=self.problemtext))   
        
         if(choose=="None"):
-        	self.href = studentid 
+        	self.edxid = studentid 
         	
         	js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_1.js")
         	frag.add_javascript(unicode(js_str))
         	frag.initialize_js('Pc2JudgeBlock')
         elif(choose=="YES"):
-		self.href = studentid 
+		self.edxid = studentid 
         	
         	js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_2.js")
         	frag.add_javascript(unicode(js_str))
         	frag.initialize_js('Pc2JudgeBlock2')
         elif(choose=="NO"):
-		self.href = studentid 
+		self.edxid = studentid 
         	
         	js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_3.js")
         	frag.add_javascript(unicode(js_str))
