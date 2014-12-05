@@ -65,7 +65,7 @@ class Pc2JudgeBlock(XBlock):
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
-   href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
+    href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
     problem = Integer(help="Maximum width of the video", default=0, scope=Scope.content)
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
