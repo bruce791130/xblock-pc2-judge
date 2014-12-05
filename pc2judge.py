@@ -96,19 +96,19 @@ class Pc2JudgeBlock(XBlock):
         if(choose=="None"):
         	self.href = studentid 
         	
-        	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_1.js")
+        	js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_1.js")
         	frag.add_javascript(unicode(js_str))
         	frag.initialize_js('Pc2JudgeBlock')
         elif(choose=="YES"):
 		self.href = studentid 
         	
-        	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_2.js")
+        	js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_2.js")
         	frag.add_javascript(unicode(js_str))
         	frag.initialize_js('Pc2JudgeBlock2')
         elif(choose=="NO"):
 		self.href = studentid 
         	
-        	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_3.js")
+        	js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_3.js")
         	frag.add_javascript(unicode(js_str))
         	frag.initialize_js('Pc2JudgeBlock')
         #html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge2.html")
