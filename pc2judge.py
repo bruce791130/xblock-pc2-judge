@@ -67,7 +67,7 @@ class Pc2JudgeBlock(XBlock):
     """A simple block: just show some fixed content."""
     href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
-    problem = Integer(help="Maximum width of the video", default=0, scope=Scope.content)
+    problemtext = Integer(help="Maximum width of the video", default=0, scope=Scope.content)
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
@@ -75,7 +75,7 @@ class Pc2JudgeBlock(XBlock):
     def student_view(self, context=None):  # pylint: disable=W0613
         HOST, PORT = "140.115.51.227", 9876
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.problem=3
+        self.problemtext=3
         studentid =str(self.runtime.anonymous_student_id)
         self.href = studentid 
         sock.connect((HOST, PORT))
@@ -86,12 +86,12 @@ class Pc2JudgeBlock(XBlock):
         sock2.connect((HOST2, PORT2))
         sock2.sendall(studentid)
         ok = sock2.recv(1024).strip()
-        sock2.sendall(str(self.problem))
+        sock2.sendall(str(self.problemtext))
         choose = sock2.recv(1024).strip()
         
         sock2.close()
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
-        frag = Fragment(unicode(html_str).format(href=self.href,problem=self.problem))   
+        frag = Fragment(unicode(html_str).format(href=self.href,problemtext=self.problemtext))   
        
         if(choose=="None"):
         	self.href = studentid 
