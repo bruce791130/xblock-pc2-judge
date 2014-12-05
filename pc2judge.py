@@ -65,10 +65,10 @@ class Pc2JudgeBlock(XBlock):
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
-    edxid = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
-    maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
-    problemtext = Integer(help="Maximum width of the video", default=0, scope=Scope.content)
-    maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
+    edxid = String(help="URL of the video page at the provider", default=None, scope=Scope.user_state)
+    maxwidth = Integer(help="Maximum width of the video", default=800, scope=SScope.user_state)
+    problemtext = Integer(help="Maximum width of the video", default=0, scope=Scope.user_state)
+    maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.user_state)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
         return self.zcore895
