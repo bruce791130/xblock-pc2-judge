@@ -65,39 +65,61 @@ class Pc2JudgeBlock(XBlock):
         scope=Scope.settings
     )
     """A simple block: just show some fixed content."""
-    href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
+   href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
+    problem = Integer(help="Maximum width of the video", default=0, scope=Scope.content)
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
-        return self.zcore895
+        return self.zscore
     def student_view(self, context=None):  # pylint: disable=W0613
+        HOST, PORT = "140.115.51.227", 9876
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.problem=3
+        studentid =str(self.runtime.anonymous_student_id)
+        self.href = studentid 
+        sock.connect((HOST, PORT))
+        sock.sendall(studentid)
+        sock.close()
+        HOST2, PORT2 = "140.115.51.227", 9888
+        sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock2.connect((HOST2, PORT2))
+        sock2.sendall(studentid)
+        ok = sock2.recv(1024).strip()
+        sock2.sendall(str(self.problem))
+        choose = sock2.recv(1024).strip()
         
-        userid = str(self.runtime.anonymous_student_id)
-        #self.zxscore = 84
-        #test=str(self.max_score())
-        self.score2 = 70
-        self.score_published2 = True
-        self.score_approved2 = True
-        #test=str(self.score2)
-        event_data = {'value': self.weight, 'max_value': self.max_score(),}
-        
-        self.pc2(12)    
-        #self.runtime.publish(self, 'progress', {'value':  self.score2,'max_value': self.max_score(),})
+        sock2.close()
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge.html")
-        frag = Fragment(unicode(html_str).format(self=self))
-        frag.add_css("""
-            .Pc2Judge {
-                border: solid 1px #888; padding: 3px;
-            }
-            """)
+        frag = Fragment(unicode(html_str).format(href=self.href,problem=self.problem))   
+       
+        if(choose=="None"):
+        	self.href = studentid 
+        	
+        	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_1.js")
+        	frag.add_javascript(unicode(js_str))
+        	frag.initialize_js('Pc2JudgeBlock')
+        elif(choose=="YES"):
+		    self.href = studentid 
+        	
+        	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_2.js")
+        	frag.add_javascript(unicode(js_str))
+        	frag.initialize_js('Pc2JudgeBlock2')
+        elif(choose=="NO"):
+		    self.href = studentid 
+        	
+        	js_str = pkg_resources.resource_string(__name__, "static/js/src/Pc2Judge_3.js")
+        	frag.add_javascript(unicode(js_str))
+        	frag.initialize_js('Pc2JudgeBlock')
+        #html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge2.html")
+       
         #sock.connect((HOST, PORT))
         #sock.sendall(test)
         #sock.sendall(test)
         #sock.close()
-       
         
-        frag.initialize_js('Pc2JudgeBlock')
+        
+        #frag.initialize_js('Pc2JudgeBlock')
         return frag
         
     def pc2(self, data, suffix=''): 
