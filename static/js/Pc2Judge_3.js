@@ -1,4 +1,4 @@
-function Pc2JudgeBlock(runtime, element) {
+function Pc2JudgeBlock3(runtime, element) {
  document.cookie = "studentid=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
  document.cookie = "problem=; expires=Thu, 01 Jan 1970 00:00:00 UTC";   
  var v =  document.getElementById("edx").value;
@@ -7,7 +7,7 @@ function Pc2JudgeBlock(runtime, element) {
  setCookie("studentid", v, 30);
  setCookie("problem", v2, 30);
        
-document.getElementById("iframe1").src = "http://acnlab.openedx.tw/correct.html?id="+v+"&problem="+v2;
+document.getElementById("iframe1").src = "http://acnlab.openedx.tw/error.html?id="+v+"&problem="+v2;
 	   
 //location.href ="http://acnlab.openedx.tw/pc2.html?id="+"ffff"; 
 //window.location="http://www.w3schools.com/"+"js/js_input_examples.asp"
