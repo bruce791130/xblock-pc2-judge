@@ -156,7 +156,7 @@ class Pc2JudgeBlock(XBlock):
         """
         Called when submitting the form in Studio.
         """
-        self.problemtext = data.get('problemtext')
+        self.problemtext = edxdata.get('problemtext')
         
 
         return {'result': 'success'}
