@@ -69,6 +69,7 @@ class Pc2JudgeBlock(XBlock):
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
     problemtext = String(help="Maximum width of the video", default='2', scope=Scope.content)
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
+    href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
         return self.zcore895
