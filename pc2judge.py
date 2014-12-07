@@ -143,7 +143,7 @@ class Pc2JudgeBlock(XBlock):
         
     def studio_view(self, context):
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge_edit.html")
-        problemtext = self.problemtext or ''
+        
         frag = Fragment(unicode(html_str).format(problemtext=problemtext))
 
         js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_edit.js")
