@@ -110,7 +110,7 @@ class Pc2JudgeBlock(XBlock):
         	
         	js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_3.js")
         	frag.add_javascript(unicode(js_str))
-        	frag.initialize_js('Pc2JudgeBlock')
+        	frag.initialize_js('Pc2JudgeBlock3')
         #html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge2.html")
        
         #sock.connect((HOST, PORT))
