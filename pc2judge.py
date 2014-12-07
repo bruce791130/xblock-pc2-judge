@@ -14,46 +14,7 @@ from xblock.fragment import Fragment
 log = logging.getLogger(__name__)
 
 class Pc2JudgeBlock(XBlock):
-    has_score = True
-    icon_class = 'problem'
    
-    weight = Float(
-        display_name="Problem Weight",
-        default=1,
-        help=("Defines the number of points each problem is worth. "
-              "If the value is not set, the problem is worth the sum of the "
-              "option point values."),
-        values={"min": 0, "step": .1},
-        scope=Scope.settings
-    )
-    score2 = Float(
-        display_name="Grade score",
-        default=10,
-        help=("Grade score given to assignment by staff."),
-        values={"min": 0, "step": .1},
-        scope=Scope.user_state
-    )
-    score_published2 = Boolean(
-        display_name="Whether score has been published.",
-        help=("This is a terrible hack, an implementation detail."),
-        default=True,
-        scope=Scope.user_state
-    )
-
-    score_approved2 = Boolean(
-        display_name="Whether the score has been approved by an instructor",
-        help=("Course staff may submit grades but an instructor must approve "
-              "grades before they become visible."),
-        default=True,
-        scope=Scope.user_state
-    )
-    zcore895= Float(
-        #display_name="Maximum score",
-        help=("Maximum grade score given to assignment by staff."),
-        values={"min": 0, "step": .1},
-        default=10,
-        scope=Scope.settings
-    )
     """A simple block: just show some fixed content."""
     edxid = String(help="URL of the video page at the provider", default=None, scope=Scope.user_state)
     maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
@@ -61,8 +22,7 @@ class Pc2JudgeBlock(XBlock):
     maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
     href = String(help="URL of the video page at the provider", default=None, scope=Scope.content)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
-    def max_score(self):
-        return self.zcore895
+   
     def student_view(self, context):  # pylint: disable=W0613
         HOST, PORT = "140.115.51.227", 9876
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
