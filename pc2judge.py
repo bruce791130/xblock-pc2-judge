@@ -5,23 +5,12 @@ import cgi
 import socket
 import sys
 from urlparse import urlparse
-from lxml import etree
-from pkg_resources import resource_string
 
-
-from xmodule.x_module import XModule
-from xmodule.raw_module import RawDescriptor
-from xblock.core import Scope, String
-from xmodule.annotator_mixin import get_instructions
-from xmodule.annotator_token import retrieve_token
-from xblock.fragment import Fragment
-from xblock.run_script import run_script
-import textwrap
 
 from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer,ScopeIds
 from xblock.fragment import Fragment
-import xblock.runtime
+
 log = logging.getLogger(__name__)
 
 class Pc2JudgeBlock(XBlock):
