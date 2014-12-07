@@ -66,9 +66,9 @@ class Pc2JudgeBlock(XBlock):
     )
     """A simple block: just show some fixed content."""
     edxid = String(help="URL of the video page at the provider", default=None, scope=Scope.user_state)
-    maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.content)
-    problemtext = String(help="Maximum width of the video", default='2', scope=Scope.content)
-    maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.content)
+    maxwidth = Integer(help="Maximum width of the video", default=800, scope=Scope.user_state)
+    problemtext = String(help="Maximum width of the video", default='2', scope=Scope.user_state)
+    maxheight = Integer(help="Maximum height of the video", default=450, scope=Scope.user_state)
     watched = Integer(help="How many times the student has watched it?", default=0, scope=Scope.user_state)
     def max_score(self):
         return self.zcore895
@@ -143,8 +143,8 @@ class Pc2JudgeBlock(XBlock):
         
     def studio_view(self, context):
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge_edit.html")
-        problemtext = self.problemtext or ''
-        frag = Fragment(unicode(html_str).format(problemtext=problemtext))
+        
+        frag = Fragment(unicode(html_str).format(maxwidth=self.maxwidth, maxheight=self.maxheight))
 
         js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_edit.js")
         frag.add_javascript(unicode(js_str))
