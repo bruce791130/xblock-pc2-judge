@@ -75,7 +75,7 @@ class Pc2JudgeBlock(XBlock):
     def student_view(self, context=None):  # pylint: disable=W0613
         HOST, PORT = "140.115.51.227", 9876
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.problemtext=3
+        #self.problemtext=3
         studentid =str(self.runtime.anonymous_student_id)
         self.edxid = studentid 
         sock.connect((HOST, PORT))
@@ -142,17 +142,24 @@ class Pc2JudgeBlock(XBlock):
         return {'status': 'ok'}   
         
     def studio_view(self, context):
-        html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge2.html")
-        frag = Fragment(unicode(html_str).format(self=self))
-        frag.add_css("""
-            .Pc2Judge2 {
-                border: solid 1px #888; padding: 3px;
-            }
-            """)
-        js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge.js")
+        html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge_edit.html")
+        href = self.href or ''
+        frag = Fragment(unicode(html_str).format(problemtext=problemtext))
+
+        js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_edit.js")
         frag.add_javascript(unicode(js_str))
-        frag.initialize_js('Pc2JudgeBlock')
+        frag.initialize_js('Pc2JudgeEditBlock')
+
         return frag
+
+    def studio_submit(self, data, suffix=''):
+        """
+        Called when submitting the form in Studio.
+        """
+        self.problemtext = data.get('problemtext')
+        
+
+        return {'result': 'success'}
 
     @staticmethod
     def workbench_scenarios():
