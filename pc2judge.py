@@ -22,6 +22,7 @@ from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Scope, String, Float, Integer,ScopeIds
 from xblock.fragment import Fragment
 import xblock.runtime
+log = logging.getLogger(__name__)
 
 class Pc2JudgeBlock(XBlock):
     has_score = True
@@ -145,7 +146,8 @@ class Pc2JudgeBlock(XBlock):
     def studio_view(self, context):
         html_str = pkg_resources.resource_string(__name__, "static/html/Pc2Judge_edit.html")
         
-        frag = Fragment(unicode(html_str).format(maxwidth=self.maxwidth, maxheight=self.maxheight))
+        href = self.href or ''
+        frag = Fragment(unicode(html_str).format(href=href, maxwidth=self.maxwidth, maxheight=self.maxheight))
 
         js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_edit.js")
         frag.add_javascript(unicode(js_str))
@@ -157,6 +159,7 @@ class Pc2JudgeBlock(XBlock):
         """
         Called when submitting the form in Studio.
         """
+        self.href = data.get('href')
         self.maxwidth = data.get('maxwidth')
         self.maxheight = data.get('maxheight')
 
