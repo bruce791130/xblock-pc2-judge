@@ -151,7 +151,7 @@ class Pc2JudgeBlock(XBlock):
 
         js_str = pkg_resources.resource_string(__name__, "static/js/Pc2Judge_edit.js")
         frag.add_javascript(unicode(js_str))
-        frag.initialize_js('Pc2JudgeEditBlock')
+        frag.initialize_js('SimpleVideoEditBlock')
 
         return frag
 
