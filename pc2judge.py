@@ -103,7 +103,7 @@ class Pc2JudgeBlock(XBlock):
             ("Edx-Pc2-Judge", 
               """
                 <vertical_demo>
-                   <pc2judge  />  
+                   <pc2judge  maxwidth=200/>  
                    <html_demo><div>Rate the video:</div></html_demo>
                 </vertical_demo>
              """),
